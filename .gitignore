@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local vector DB leftovers
+embeddings/
+backend/embeddings/
+
+# Python cache
+.pytest_cache/
+.mypy_cache/
+
+# VS Code
+.vscode/
+
+# Environment files
+.env.local

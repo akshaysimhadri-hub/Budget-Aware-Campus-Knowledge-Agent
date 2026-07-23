@@ -1,0 +1,572 @@
+/* =========================
+   GLOBAL & THEME
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    background: #212121;
+    color: white;
+    position: relative;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* HIDE SCROLLBAR GLOBALLY */
+.chat-wrapper,
+.sidebar-content {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.chat-wrapper::-webkit-scrollbar,
+.sidebar-content::-webkit-scrollbar {
+    display: none;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.18), transparent 70%);
+    top: -250px;
+    right: -150px;
+    z-index: -1;
+}
+
+/* =========================
+   FLOATING TOGGLE
+========================= */
+.floating-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+    width: 260px;
+    background: rgba(23, 23, 23, 0.92);
+    backdrop-filter: blur(14px);
+    border-right: 1px solid #2f2f2f;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.brand-text h2 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.brand-text p {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 2px;
+}
+
+.new-chat {
+    padding: 16px;
+}
+
+.new-chat-btn {
+    width: 100%;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    color: white;
+    padding: 13px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+}
+
+.sidebar-content div {
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    color: #d1d5db;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.sidebar-content div:hover {
+    background: #2d2d2d;
+}
+
+/* =========================
+   MAIN CHAT AREA (FULL WIDTH)
+========================= */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.header {
+    height: 74px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    background: rgba(23, 23, 23, 0.75);
+    border-bottom: 1px solid #2f2f2f;
+}
+
+.chat-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.chat {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 40px 40px 150px 40px;
+}
+
+.welcome {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.welcome h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+/* MESSAGES */
+.user {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    padding: 14px 20px;
+    border-radius: 18px 18px 0 18px;
+    margin-left: auto;
+    width: fit-content;
+    max-width: 85%;
+    margin-bottom: 24px;
+}
+
+.bot {
+    background: #2d2d2d;
+    padding: 14px 20px;
+    border-radius: 18px 18px 18px 0;
+    width: fit-content;
+    max-width: 90%;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+/* =========================
+   INPUT (FULL WIDTH)
+========================= */
+.input-container {
+    padding: 22px;
+    background: #212121;
+    width: 100%;
+}
+
+.input-box {
+    width: 100%;
+    background: rgba(43, 43, 43, 0.9);
+    border: 1px solid #3b3b3b;
+    border-radius: 20px;
+    display: flex;
+    padding: 8px 15px;
+    align-items: center;
+}
+
+input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px;
+    font-size: 16px;
+}
+
+#sendBtn {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    border: none;
+    background: white;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s ease;
+}
+
+/* STOP BUTTON STATE */
+#sendBtn.stop-active {
+    background: #ef4444;
+    /* ChatGPT Style Red */
+    color: white;
+}
+
+.suggestions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 36px;
+}
+
+.suggestions button {
+    background: #2d2d2d;
+    border: 1px solid #444;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* LIGHT MODE */
+body.light {
+    background: #f9fafb;
+    color: #1f2937;
+}
+
+body.light .sidebar {
+    background: #ffffff;
+}
+
+body.light .header {
+    background: white;
+}
+
+body.light .input-container {
+    background: #f9fafb;
+}
+
+body.light .input-box {
+    background: white;
+    border-color: #d1d5db;
+}
+
+body.light input {
+    color: black;
+}
+
+body.light .bot {
+    background: #f3f4f6;
+    color: black;
+}
+
+
+
+/* =========================
+   MOBILE MENU BUTTON
+========================= */
+
+.menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 26px;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* TABLETS */
+@media (max-width: 1024px) {
+
+    .chat {
+        padding: 30px 25px 140px 25px;
+    }
+
+    .welcome h1 {
+        font-size: 34px;
+    }
+
+    .user,
+    .bot {
+        max-width: 95%;
+    }
+}
+
+/* MOBILE DEVICES */
+@media (max-width: 768px) {
+
+    body {
+        overflow: hidden;
+    }
+
+    /* SIDEBAR HIDDEN BY DEFAULT */
+    .sidebar {
+        position: fixed;
+        left: -280px;
+        top: 0;
+        height: 100vh;
+        z-index: 999;
+        transition: left 0.3s ease;
+    }
+
+    /* SHOW SIDEBAR */
+    .sidebar.show-sidebar {
+        left: 0;
+    }
+
+    /* SHOW MENU BUTTON */
+    .menu-btn {
+        display: block;
+    }
+
+    .header {
+        padding: 0 16px;
+    }
+
+    .chat {
+        padding: 20px 14px 130px 14px;
+    }
+
+    .welcome {
+        height: auto;
+        margin-top: 80px;
+        padding: 20px;
+    }
+
+    .welcome h1 {
+        font-size: 28px;
+    }
+
+    .welcome p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .suggestions {
+        gap: 10px;
+    }
+
+    .suggestions button {
+        width: 100%;
+    }
+
+    .user,
+    .bot {
+        max-width: 100%;
+        font-size: 15px;
+        padding: 12px 16px;
+    }
+
+    .input-container {
+        padding: 12px;
+    }
+
+    .input-box {
+        border-radius: 16px;
+    }
+
+    input {
+        font-size: 15px;
+        padding: 12px;
+    }
+
+    #sendBtn {
+        width: 42px;
+        height: 42px;
+    }
+
+    .floating-toggle {
+        width: 44px;
+        height: 44px;
+        top: 14px;
+        right: 14px;
+    }
+}
+
+/* SMALL PHONES */
+@media (max-width: 480px) {
+
+    .brand-text h2 {
+        font-size: 16px;
+    }
+
+    .brand-text p {
+        font-size: 11px;
+    }
+
+    .title-block h3 {
+        font-size: 20px;
+    }
+
+    .title-block p {
+        font-size: 13px;
+    }
+
+    .welcome h1 {
+        font-size: 24px;
+    }
+
+    .chat {
+        padding: 16px 10px 120px 10px;
+    }
+
+    .user,
+    .bot {
+        font-size: 14px;
+    }
+}
+
+
+/* =========================
+   CLOSE SIDEBAR BUTTON
+========================= */
+
+.close-sidebar {
+    display: none;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+    .close-sidebar {
+
+        display: flex;
+
+        position: absolute;
+
+        top: 18px;
+
+        right: 18px;
+
+        width: 38px;
+
+        height: 38px;
+
+        border-radius: 50%;
+
+        border: none;
+
+        background: #2d2d2d;
+
+        color: white;
+
+        font-size: 18px;
+
+        cursor: pointer;
+
+        align-items: center;
+
+        justify-content: center;
+
+        z-index: 1001;
+    }
+
+    .sidebar {
+
+        width: 260px;
+
+        position: fixed;
+
+        left: -280px;
+
+        top: 0;
+
+        height: 100vh;
+
+        z-index: 999;
+
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.show-sidebar {
+
+        left: 0;
+    }
+
+    /* INPUT ALWAYS VISIBLE */
+    .main {
+
+        height: 100vh;
+    }
+
+    .chat-wrapper {
+
+        flex: 1;
+
+        overflow-y: auto;
+    }
+
+    .input-container {
+
+        position: sticky;
+
+        bottom: 0;
+
+        z-index: 50;
+    }
+
+    .welcome {
+
+        min-height: auto;
+
+        padding-top: 60px;
+
+        padding-bottom: 40px;
+    }
+}
